@@ -1,0 +1,23 @@
+.mapWrapper{
+    position: relative;
+    background-image: url('/images/map.png');
+    background-size: cover;
+}
+.map{
+    filter: brightness(105%);
+   
+    background-size: cover;
+    width:100%;
+    min-height: 1000px;
+    background-position: 50% 10%;
+    position:absolute;
+}
+
+.isolate{
+    background-color: rgba(17,24,39,0.80);
+   
+}
+.text-light h2, .text-light p, .text-light label, .text-light a{
+    color:#fff !important;
+    text-decoration: none;
+}

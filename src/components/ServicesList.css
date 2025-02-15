@@ -1,0 +1,22 @@
+.servicesList{
+ display:flex;
+ flex-direction: column;
+ padding-top:20px;
+ justify-content: center;
+ /* padding-left:20% */
+}
+
+.servicesList li{
+  list-style: circle;
+font-size:20px;
+padding:10px;
+flex:2;
+}
+
+.pressureWashImg{
+  border-radius: 50%;
+  width:250px;
+  height: 250px;
+  background-image: url('/images/pressure_wash.jpg');
+  background-size: cover;
+}
