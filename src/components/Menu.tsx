@@ -11,7 +11,7 @@ function Menu(){
           <div className="d-flex flex-row">
             <a href="#top">Home</a>
             <a href="#services">Services</a>
-            <a href="#prices">Prices</a>
+            <a href="#pricing">Prices</a>
             <a href="#contact">Contact</a>
           </div>
           

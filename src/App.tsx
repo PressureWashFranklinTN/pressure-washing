@@ -31,7 +31,7 @@ function App() {
                 <div className="row">
                   <div className="col dFlex2 pt-sm-0">
                     <p>Get a free quote today and make your property shine!</p>
-                    <div className="btn btn-primary">Get A Quote</div>
+                    <a className="btn btn-primary" href="#contact">Get A Quote</a>
                   </div>
                 </div>
               </div>
