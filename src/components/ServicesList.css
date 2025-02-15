@@ -20,3 +20,31 @@ flex:2;
   background-image: url('/images/pressure_wash.jpg');
   background-size: cover;
 }
+
+.video-container {
+  width: 300px; /* Set your preferred size */
+  height: 300px;
+  border-radius: 50%; /* Makes it fully rounded */
+  overflow: hidden;
+  position: relative; /* Allows absolute positioning inside */
+  background: black; /* Fallback background */
+}
+
+.video-player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the video */
+ 
+  height: 350px !important;
+  width:600px !important;
+  max-width: 800px !important;
+
+}
+
+h2.fancyFont{
+  font-family:'Times New Roman', Times, serif;
+  font-size: 50px;
+  
+
+}

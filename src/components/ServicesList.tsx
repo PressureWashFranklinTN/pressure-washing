@@ -1,4 +1,5 @@
 import "./ServicesList.css";
+import VideoLoop from "./VideoLoop";
 function ServicesList() {
   return (
     <>
@@ -10,7 +11,7 @@ function ServicesList() {
             <div className="row">
              
               <div className="col-lg-8 col-md-12   p-5">
-                <h2 className="text-center">Services</h2>
+                <h2 className="fancyFont">Services</h2>
 
                 <ul className="servicesList">
                   <li className="">
@@ -21,10 +22,14 @@ function ServicesList() {
                   <li className="">Cement Board Siding</li>
                   <li className="">Entry Way</li>
                   <li className="">Decking</li>
+                  <li className="">Cement and Driveway Sealing</li>
                 </ul>
               </div>
               <div className="col-lg-4 d-none d-lg-flex justify-content-center align-items-center">
-                <div className="pressureWashImg" ></div>
+                {/* <div className="pressureWashImg" ></div> */}
+                <div className="video-container">
+                <VideoLoop></VideoLoop>
+                </div>
               </div>
             </div>
             <div className="row">

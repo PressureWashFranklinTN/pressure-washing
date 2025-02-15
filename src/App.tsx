@@ -4,7 +4,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import ServicesList from "./components/ServicesList";
 import "./hero.css";
 import MyMapComponent from "./components/GoogleMap";
-import Pricing from "./components/Pricing";
+// import Pricing from "./components/Pricing";
+//import VideoLoop from "./components/VideoLoop";
 import './App.css'
 
 function App() {
@@ -45,9 +46,9 @@ function App() {
              
      
           <MyMapComponent></MyMapComponent>        
-       
+     
       
-          <Pricing></Pricing>
+          {/* <Pricing></Pricing> */}
 
           
        

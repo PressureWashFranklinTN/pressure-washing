@@ -11,8 +11,9 @@ function Menu(){
           <div className="d-flex flex-row">
             <a href="#top">Home</a>
             <a href="#services">Services</a>
-            <a href="#pricing">Prices</a>
+            {/* <a href="#pricing">Prices</a> */}
             <a href="#contact">Contact</a>
+            <a href="tel:+16157212716" type="phone">(615) 721-2716</a>
           </div>
           
         </div>
