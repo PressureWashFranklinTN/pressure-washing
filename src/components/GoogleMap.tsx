@@ -1,9 +1,70 @@
 
 import "../components/GoogleMap.css";
-
+import { useState } from "react";
 
 
 function MyMapComponent() {
+ 
+    const [token, setToken] = useState("");
+    const [formData, setFormData] = useState({
+      nameFirst: '',
+      nameLast: '',
+      address: '',
+      phone: '',
+      email: '',
+      message: '',
+      country: 'US'
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
+    // Fetch token when input is focused
+    const fetchToken = async () => {
+      try {
+        const response = await fetch("https://api.pressurewashfranklintn.com/api/contact/token");
+        if (!response.ok) throw new Error("Failed to fetch token");
+  
+        const data = await response.json();
+        setToken(data.token);
+      } catch (error) {
+        console.error("Error fetching token:", error);
+      }
+    };
+  
+    // Handle input changes
+    const handleChange = (e:any) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+  
+    // Submit form with Authorization header
+    const handleSubmit = async (e:any) => {
+      e.preventDefault();
+  
+      if (!token) {
+        console.error("Token is missing, cannot submit form.");
+        return;
+      }
+  
+      try {
+        const response = await fetch("https://api.pressurewashfranklintn.com/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}` // Attach token here
+          },
+          body: JSON.stringify(formData)
+        });
+  
+        const result = await response.json();
+        if (response.ok) {
+          console.log("Success:", result);
+          setIsSubmitted(true);  // Hide the form and show confirmation
+        } else {
+          console.error("Error:", result);
+        }
+      } catch (error) {
+        console.error("Network error:", error);
+      }
+    };
   return (
     <>
       <div className="row m-0 p-0 w-100 overflow-hidden">
@@ -32,19 +93,30 @@ function MyMapComponent() {
                         Contact Us
                       </h2>
                       <p>Phone:  <a href="tel:+16157212716" type="phone">(615) 721-2716</a></p>
-                      <p className="mt-2 text-lg/8 text-gray-600">
-                        Intrested in more information? Tell us your needs:
-                      </p>
+                     
                     </div>
-                    <form
-                      action="#"
-                      method="POST"
+
+
+                    {isSubmitted ? (
+                      <div className="flex flex-col items-center justify-center p-6 rounded-lg shadow-md">
+                          <h2 className="text-2xl font-semibold text-green-600 mb-4">Thank you for your submission!</h2>
+                          <p className="text-lg text-green-500 text-center">We have received your message and will get back to you soon.</p>            
+                      </div>
+         
+            ) : (
+              <>
+                  <div className="mx-auto max-w-2xl text-center">
+                          <p className="mt-2 text-lg/8 text-gray-600">
+                            Intrested in more information? Tell us your needs:
+                          </p>
+                    </div>
+                    <form onSubmit={handleSubmit}
                       className="mx-auto mt-16 max-w-xl sm:mt-20"
                     >
                       <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
                           <label
-                            htmlFor="first-name"
+                            htmlFor="nameFirst"
                             className="block text-sm/6 font-semibold text-gray-900"
                           >
                             First name
@@ -52,16 +124,19 @@ function MyMapComponent() {
                           <div className="mt-2.5">
                             <input
                               type="text"
-                              name="first-name"
-                              id="first-name"
+                              name="nameFirst"
+                              id="nameFirst"
                               autoComplete="given-name"
                               className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                              onFocus={fetchToken}
+                              onChange={handleChange}
+                              required
                             />
                           </div>
                         </div>
                         <div>
                           <label
-                            htmlFor="last-name"
+                            htmlFor="nameLast"
                             className="block text-sm/6 font-semibold text-gray-900"
                           >
                             Last name
@@ -69,10 +144,12 @@ function MyMapComponent() {
                           <div className="mt-2.5">
                             <input
                               type="text"
-                              name="last-name"
-                              id="last-name"
+                              name="nameLast"
+                              id="nameLast"
                               autoComplete="family-name"
                               className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                              onChange={handleChange}
+                              required
                             />
                           </div>
                         </div>
@@ -90,6 +167,8 @@ function MyMapComponent() {
                               id="address"
                               autoComplete="organization"
                               className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                              onChange={handleChange}
+                              required
                             />
                           </div>
                         </div>
@@ -107,12 +186,13 @@ function MyMapComponent() {
                               id="email"
                               autoComplete="email"
                               className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                              onChange={handleChange}
                             />
                           </div>
                         </div>
                         <div className="sm:col-span-2">
                           <label
-                            htmlFor="phone-number"
+                            htmlFor="phone"
                             className="block text-sm/6 font-semibold text-gray-900"
                           >
                             Phone number
@@ -126,6 +206,8 @@ function MyMapComponent() {
                                   autoComplete="country"
                                   aria-label="Country"
                                   className="col-start-1 row-start-1 w-full appearance-none rounded-md py-2 pr-7 pl-3.5 text-base text-gray-500 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                  onChange={handleChange}
+                                  required
                                 >
                                   <option>US</option>
                                   <option>CA</option>
@@ -139,18 +221,20 @@ function MyMapComponent() {
                                   data-slot="icon"
                                 >
                                   <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                   />
                                 </svg>
                               </div>
                               <input
                                 type="text"
-                                name="phone-number"
-                                id="phone-number"
+                                name="phone"
+                                id="phone"
                                 className="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                                 placeholder="123-456-7890"
+                                onChange={handleChange}
+                                required
                               />
                             </div>
                           </div>
@@ -168,6 +252,7 @@ function MyMapComponent() {
                               id="message"
                               rows={4}
                               className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                              onChange={handleChange}
                             ></textarea>
                           </div>
                         </div>
@@ -194,6 +279,8 @@ function MyMapComponent() {
                         </button>
                       </div>
                     </form>
+                    </>
+            )}
                   </div>
                 </div>
               </div>
