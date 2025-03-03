@@ -23,7 +23,7 @@ jobs:
         run: |
             $sitemapPath = "dist/sitemap.xml"
             $date = Get-Date -Format "yyyy-MM-dd"
-            @'
+            @"
             <?xml version="1.0" encoding="UTF-8"?>
             <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
                 <url>
@@ -33,7 +33,7 @@ jobs:
                     <priority>1.0</priority>
                 </url>
             </urlset>
-            '@ | Set-Content -Path $sitemapPath
+            "@ | Set-Content -Path $sitemapPath
         shell: powershell
 
       - name: Move dist folder to deployment location
