@@ -5,7 +5,7 @@ function Menu(){
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#top">
-            <img src="/images/logo2.svg" className="" alt="Pressure Wash Franklin TN Logo" />
+            <img src="/images/logo2.svg" width="209" height="84" className="" alt="Pressure Wash Franklin TN Logo" />
           </a>
 
           <div className="d-flex flex-row">

@@ -20,7 +20,7 @@
 }
 
 .hero{
-    background-image: url('/images/home.jpg');
+    background-image: url('/images/home.webp');
     background-size: cover;
     width:100%;
     min-height: 800px;
