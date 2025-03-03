@@ -19,6 +19,24 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      - name: Update sitemap.xml lastmod date
+        run: |
+          $sitemapPath = "dist/sitemap.xml"
+          $date = Get-Date -Format "yyyy-MM-dd"
+          $sitemapContent = @"
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://yourwebsite.com/</loc>
+        <lastmod>$date</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+</urlset>
+"@
+          $sitemapContent | Set-Content -Path $sitemapPath
+        shell: powershell
+
       - name: Move dist folder to deployment location
         run: |
             if (Test-Path "C:\websites\pressurewashfranklintn") { Remove-Item -Recurse -Force "C:\websites\pressurewashfranklintn" }

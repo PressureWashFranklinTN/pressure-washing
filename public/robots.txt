@@ -1,0 +1,24 @@
+User-agent: *
+Disallow: /
+Allow: /$
+
+# Allow only essential search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots and scrapers
+User-agent: MJ12bot
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: DotBot
+User-agent: BLEXBot
+User-agent: Baiduspider
+User-agent: YandexBot
+User-agent: MauiBot
+Disallow: /
+
+# Prevent excessive crawling
+Crawl-delay: 10
